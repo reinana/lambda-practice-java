@@ -1,0 +1,58 @@
+import java.util.function.*;
+import java.util.Arrays;
+
+class Main{
+    public static void main(String[] args) {
+        System.out.println(4);
+        
+        Supplier<String> lambda1 = () -> { return "A new world";};
+
+        System.out.println(lambda1.get());
+        // Supplierはget
+        Supplier<Integer> lambda2 = () -> 4+5;
+        System.out.println(lambda2.get());
+        //{}あるとreturnいる
+        Integer p = 40;
+
+        Supplier<String> lambda3 = () -> 4+p+" ";
+        System.out.println(lambda3.get());
+
+        Function<Integer, Integer> squaredF = (x) -> x*x;
+        System.out.println(squaredF.apply(2));
+
+        円の面積のラムダ
+        Function<Double, Double> ciecleArea = x -> x*x*Math.PI;
+        System.out.println(ciecleArea.apply(2.0));
+
+        Consumer<Integer> circle2 = x ->{System.out.println(x*x*Math.PI);};
+        circle2.accept(2);
+
+        
+        // xを受け取り、x個の0を持つ配列のラムダ
+        Function<Integer, int[]> list = x ->{
+            return new int[x];
+        };
+        System.out.println(Arrays.toString(list.apply(2)));
+
+        // fizzbuzzを実行するラムダSupplier
+        Supplier<String> fizzbuzz = () ->{
+            String str = "";
+            for(int i=1; i<30; i++){
+                str += i%15==0 ? "fizzbuzz": i%3==0? "fizz": i%5==0? "buzz": i;
+            }
+            return str;
+        };
+        System.out.println(fizzbuzz.get());
+        //fizzbuzzを実行するラムダConsumer
+        Consumer<Integer> fizzbuzz2 = x ->{
+            for(int i=1; i<x; i++){
+                if(i%15==0) System.out.print("fizzbuzz");
+                else if(i%3==0) System.out.print("fizz");
+                else if(i%5==0) System.out.print("buzz");
+                else System.out.print(i);
+            }
+        };
+        fizzbuzz2.accept(30);
+        
+    }
+}
